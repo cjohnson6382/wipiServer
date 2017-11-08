@@ -106,7 +106,7 @@ def dictify (l):
 def fix_ie (cell):
 	print("fix_ie")
 	print(type(cell))
-	cell.setlist("IE", list(filter(lambda x: "Unknown" not in x, f[1].getlist("IE"))))
+	cell.setlist("IE", list(filter(lambda x: "Unknown" not in x, cell[1].getlist("IE"))))
 	print(type(cell))
 	return cell
 
