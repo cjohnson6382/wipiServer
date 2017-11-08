@@ -127,7 +127,7 @@ def strip_elements (cell):
 	print(type(cell))
 	return c
 
-convert_pipeline = compose([fix_ie, fix_essid, strip_elements])
+convert_pipeline = compose([fix_ie, fix_essid, strip_elements, dictify])
 
 def scan_networks ():
 	a = run(args=["sudo", "/sbin/iwlist", "wlan1", "scanning"], stdout=PIPE)
@@ -135,8 +135,6 @@ def scan_networks ():
 
 	c = b.split("Cell")
 	d = [a.split("\n") for a in c]
-
-	print(convert_pipeline)
 
 	networks = [convert_pipeline(a) for a in d]
 	return networks
