@@ -121,10 +121,11 @@ def fix_essid (cell):
 	return cell
 
 def strip_elements (cell):
-	print("strip_elements")
-	print(type(cell))
 	c = [a.strip() for a in cell]
 	print(type(cell))
+	MultiDict(c)
+	print(type(c))
+	print(c)
 	return c
 
 convert_pipeline = compose([fix_ie, fix_essid, strip_elements, dictify])
