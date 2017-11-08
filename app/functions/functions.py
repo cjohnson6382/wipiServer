@@ -100,7 +100,7 @@ def current_network ():
 def dictify (l):
 	t = [a.strip() for a in l]
 	t1 = [a.split(":", 1) for a in t]
-	t2 = MultiDict([a for a in t1 if len(a) > 1])
+	t2 = MultiDict([a.strip() for a in t1 if len(a) > 1])
 	return t2
 
 def fix_ie (cell):
@@ -120,15 +120,12 @@ def fix_essid (cell):
 		cell.setlist("ESSID", [essid])		
 	return cell
 
-def strip_elements (cell):
-	c = [a.strip() for a in cell]
-	print(type(cell))
-	MultiDict(c)
-	print(type(c))
-	print(c)
-	return c
+# def strip_elements (cell):
+# 	c = [a.strip() for a in cell]
+# 	print(type(cell))
+# 	return c
 
-convert_pipeline = compose([fix_ie, fix_essid, strip_elements, dictify])
+convert_pipeline = compose([fix_ie, fix_essid, dictify])
 
 def scan_networks ():
 	a = run(args=["sudo", "/sbin/iwlist", "wlan1", "scanning"], stdout=PIPE)
