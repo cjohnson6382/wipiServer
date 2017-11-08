@@ -108,11 +108,9 @@ def fix_ie (cell):
 	return cell
 
 def fix_essid (cell):
-	print("fix_essid")
-	print(type(cell))
 	essid = cell.get("ESSID")
 	print(essid)
-	if essid: 
+	if essid:
 		essid = essid.strip('"')
 		cell.setlist("ESSID", [essid])		
 	return cell
