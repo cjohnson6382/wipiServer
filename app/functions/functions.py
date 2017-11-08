@@ -104,12 +104,11 @@ def dictify (l):
 	return t2
 
 def fix_ie (cell):
-	print(type(cell))
 	cell.setlist("IE", list(filter(lambda x: "Unknown" not in x, f[1].getlist("IE"))))
 	return cell
 
 def fix_essid (cell):
-	print(cell)
+	print(type(cell))
 	essid = cell.get("ESSID")
 	print(essid)
 	if essid: 
