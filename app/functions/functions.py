@@ -134,6 +134,6 @@ def scan_networks ():
 
 	
 	# print("about to convert multidicts", networks)
-	# networks = [a.to_dict() for a in networks]
+	networks = [a.to_dict(flat=False) for a in networks]
 	# print("success!!!!")
 	return networks
