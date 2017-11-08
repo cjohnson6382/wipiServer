@@ -1,5 +1,5 @@
 import json
-# import jsonschema
+
 from functools import wraps
 
 from flask import request, current_app, jsonify, _app_ctx_stack
@@ -7,8 +7,6 @@ from flask_cors import cross_origin
 
 from app import db
 from app.main import main
-
-from app.decorators import requires_auth
 
 from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored
 
