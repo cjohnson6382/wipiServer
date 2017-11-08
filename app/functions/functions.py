@@ -104,10 +104,14 @@ def dictify (l):
 	return t2
 
 def fix_ie (cell):
+	print("fix_ie")
+	print(type(cell))
 	cell.setlist("IE", list(filter(lambda x: "Unknown" not in x, f[1].getlist("IE"))))
+	print(type(cell))
 	return cell
 
 def fix_essid (cell):
+	print("fix_essid")
 	print(type(cell))
 	essid = cell.get("ESSID")
 	print(essid)
@@ -117,7 +121,10 @@ def fix_essid (cell):
 	return cell
 
 def strip_elements (cell):
+	print("strip_elements")
+	print(type(cell))
 	c = [a.strip() for a in cell]
+	print(type(cell))
 	return c
 
 convert_pipeline = compose([fix_ie, fix_essid, strip_elements])
