@@ -100,7 +100,7 @@ def current_network ():
 def dictify (l):
 	t = [a.strip() for a in l]
 	t1 = [a.split(":", 1) for a in t]
-	t2 = MultiDict([a.strip() for a in t1 if len(a) > 1])
+	t2 = MultiDict([a for a in t1 if len(a) > 1])
 	return t2
 
 def fix_ie (cell):
