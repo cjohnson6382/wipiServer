@@ -130,5 +130,7 @@ def scan_networks ():
 	c = b.split("Cell")
 	d = [a.split("\n") for a in c]
 
+	print(convert_pipeline, d)
+
 	networks = [convert_pipeline(a) for a in d]
 	return networks
