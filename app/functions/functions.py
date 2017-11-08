@@ -130,7 +130,7 @@ def scan_networks ():
 
 	networks = [convert_pipeline(a) for a in d]
 	print("about to convert multidicts")
-	print([type(a) for a in networks])
+	print([a.to_dict() for a in networks])
 	networks = [a.to_dict() for a in networks]
 	print(networks)
 	return networks
