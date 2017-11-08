@@ -17,7 +17,7 @@ from app.functions.functions import scan_networks, wifi_connect, clear_config, c
 def networks():
 	networks = scan_networks()
 	print("NETWORK:", type(networks), networks)
-	networks = [a.items() for a in networks]
+	networks = [a.to_dict() for a in networks]
 	return jsonify(networks)
 
 @main.route('/stored_networks', methods=["GET"])
