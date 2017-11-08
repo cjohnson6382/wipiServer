@@ -7,7 +7,7 @@ from app.models import WifiNetwork
 
 from werkzeug.datastructures import MultiDict
 
-def compose(*functions):
+def compose(functions):
 	if (len(functions) > 1):
 		return functools.reduce(lambda f, g: lambda x: f(g(x)), functions, lambda x: x)
 	else:
@@ -130,7 +130,7 @@ def scan_networks ():
 	c = b.split("Cell")
 	d = [a.split("\n") for a in c]
 
-	print(convert_pipeline, d)
+	print(convert_pipeline)
 
 	networks = [convert_pipeline(a) for a in d]
 	return networks
