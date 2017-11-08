@@ -15,6 +15,12 @@ from app.functions.functions import scan_networks, wifi_connect, clear_config, c
 def root():
 	return render_template('index.html')
 
+@main.route('/static/<string:route>' methods=["GET"])
+@cross_origin()
+def bundle(route):
+	return url_for("static", filename=route)
+
+
 @main.route('/get_networks', methods=["GET"])
 #	@requires_auth
 @cross_origin()
