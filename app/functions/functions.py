@@ -109,7 +109,6 @@ def fix_ie (cell):
 
 def fix_essid (cell):
 	essid = cell.get("ESSID")
-	print(essid)
 	if essid:
 		essid = essid.strip('"')
 		cell.setlist("ESSID", [essid])		
@@ -131,6 +130,7 @@ def scan_networks ():
 
 	networks = [convert_pipeline(a) for a in d]
 	print("about to convert multidicts")
+	print([type(a) for a in networks])
 	networks = [a.to_dict() for a in networks]
 	print(networks)
 	return networks
