@@ -128,10 +128,12 @@ def scan_networks ():
 	c = b.split("Cell")
 	d = [a.split("\n") for a in c]
 
+	d.pop(0)
+
 	networks = [convert_pipeline(a) for a in d]
+
+	
 	print("about to convert multidicts", networks)
-	networks.pop(0)
-	networks.pop()
 	networks = [a.to_dict() for a in networks]
-	print(networks)
+	print("success!!!!")
 	return networks
