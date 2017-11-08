@@ -13,7 +13,7 @@ from app.functions.functions import scan_networks, wifi_connect, clear_config, c
 @main.route('/', methods=["GET"])
 @cross_origin()
 def root():
-	return render_template('build/index.html')
+	return render_template('index.html')
 
 @main.route('/get_networks', methods=["GET"])
 #	@requires_auth
