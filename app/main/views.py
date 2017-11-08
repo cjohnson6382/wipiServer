@@ -2,14 +2,20 @@ import json
 
 from functools import wraps
 
-from flask import request, current_app, jsonify, _app_ctx_stack
+from flask import request, current_app, jsonify, _app_ctx_stack, url_for
 from flask_cors import cross_origin
 
 from app import db
 from app.main import main
 
+bundle = 
+
 from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored
 
+@main.route('/', methods=["GET"])
+@cross_origin()
+def root():
+	return url_for('static', filename='bundle.js')
 
 @main.route('/get_networks', methods=["GET"])
 #	@requires_auth
