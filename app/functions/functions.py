@@ -130,4 +130,5 @@ def scan_networks ():
 	d = [a.split("\n") for a in c]
 
 	networks = [convert_pipeline(a)[0].to_dict() for a in d]
+	print(networks)
 	return networks
