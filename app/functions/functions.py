@@ -114,11 +114,6 @@ def fix_essid (cell):
 		cell.setlist("ESSID", [essid])		
 	return cell
 
-# def strip_elements (cell):
-# 	c = [a.strip() for a in cell]
-# 	print(type(cell))
-# 	return c
-
 convert_pipeline = compose([fix_ie, fix_essid, dictify])
 
 def scan_networks ():
@@ -131,9 +126,6 @@ def scan_networks ():
 	d.pop(0)
 
 	networks = [convert_pipeline(a) for a in d]
-
-	
-	# print("about to convert multidicts", networks)
 	networks = [a.to_dict(flat=False) for a in networks]
-	# print("success!!!!")
+
 	return networks
