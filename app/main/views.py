@@ -2,7 +2,7 @@ import json
 
 from functools import wraps
 
-from flask import request, current_app, jsonify, _app_ctx_stack, url_for
+from flask import request, current_app, jsonify, _app_ctx_stack, render_template
 from flask_cors import cross_origin
 
 from app import db
@@ -13,7 +13,7 @@ from app.functions.functions import scan_networks, wifi_connect, clear_config, c
 @main.route('/', methods=["GET"])
 @cross_origin()
 def root():
-	return url_for('static', filename='bundle.js')
+	return render_template('build/index.html')
 
 @main.route('/get_networks', methods=["GET"])
 #	@requires_auth
