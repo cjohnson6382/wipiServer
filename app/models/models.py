@@ -1,11 +1,13 @@
 from app import db
 import json
 
+import datetime
+
 class WifiNetwork(db.Model):
 	__tablename__ = 'wifi_networks'
 
-	_created = db.Column(db.DateTime, default=str(db.func.now()))
-	_updated = db.Column(db.DateTime, default=str(db.func.now()), onupdate=str(db.func.now()))
+	_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+	_updated = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 
 	id = db.Column(db.Integer, primary_key=True)
 	essid = db.Column(db.String(64), nullable=False)
