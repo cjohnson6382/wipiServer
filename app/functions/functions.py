@@ -96,11 +96,13 @@ def clear_config ():
 
 def current_network ():
 	print("in current_network function")
-	a = run(args=["sudo", "/sbin/iw", "wlan1", "link"], stdout=PIPE)
+	a = run(args=["sudo", "/sbin/iwconfig", "wlan1"], stdout=PIPE)
 	b = a.stdout.decode()
 	c = b.split("\n")
 	d = [a.split(":", 1) for a in c]
 	e = [a for a in d if len(a) > 1]
+
+	print(a, b, c, d, e)
 
 	network = dict([(a[0].strip(), a[1].strip()) for a in e])
 	return network
