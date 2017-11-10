@@ -8,7 +8,7 @@ from flask_cors import cross_origin
 from app import db
 from app.main import main
 
-from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored
+from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored, disconnect
 
 @main.route('/', methods=["GET"])
 @cross_origin()
@@ -64,7 +64,7 @@ def reset():
 def disconnect():
 	status = disconnect()
 	return jsonify(status)
-	
+
 # @main.route('/current/<string:id>', methods=["GET"])
 # @cross_origin()
 # def current_network(id):
