@@ -102,9 +102,9 @@ def current_network ():
 	d = [a.split(":", 1) for a in c]
 	e = [a for a in d if len(a) > 1]
 
-	print(a, b, c, d, e)
-
 	network = dict([(a[0].strip(), a[1].strip()) for a in e])
+
+	print(network)
 	return network
 
 ########################################################
