@@ -87,6 +87,7 @@ def clear_config ():
 		return { "status": "" }
 
 def current_network ():
+	print("in current_network function")
 	a = run(args=["sudo", "/sbin/iw", "wlan1", "link"], stdout=PIPE)
 	b = a.stdout.decode()
 	c = b.split("\n")

@@ -26,7 +26,6 @@ def bundle(route):
 @cross_origin()
 def networks():
 	networks = scan_networks()
-	print("NETWORK:", type(networks), networks)
 	return jsonify(networks)
 
 @main.route('/stored_networks', methods=["GET"])
@@ -40,7 +39,11 @@ def stored():
 #	@requires_auth
 @cross_origin()
 def current():
+	print("in current_network route")
 	status = current_network()
+
+	print(status)
+
 	return jsonify(status)
 
 @main.route('/choose_network', methods=["POST"])
