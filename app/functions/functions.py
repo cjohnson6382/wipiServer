@@ -57,7 +57,7 @@ def wifi_connect (essid="", password=""):
 			if connect(): pass
 			else: return { "status": "failed to connect to %s" % w.essid }
 		else: 
-			if not password: return { "status": "cannot connect to %s; not saved and no password supplied" % essid }
+			# if not password: return { "status": "cannot connect to %s; not saved and no password supplied" % essid }
 			if wifi_add(essid, password):
 				write_conf(essid, password)
 				if connect(): pass

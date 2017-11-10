@@ -57,10 +57,7 @@ def reset():
 	status = clear_config()
 	return jsonify(status)
 
-@main.route('/current/<string:id>', methods=["GET"])
-@cross_origin()
-def current_network(id):
-	current_network(id)
-
-
-
+# @main.route('/current/<string:id>', methods=["GET"])
+# @cross_origin()
+# def current_network(id):
+# 	current_network(id)
