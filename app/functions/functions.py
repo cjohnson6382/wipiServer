@@ -53,6 +53,7 @@ def connect ():
 	else: return False
 
 def wifi_connect (essid="", password=""):
+	a = run(args=["sudo", "ip", "link", "set", "wlan1", "up"], stdout=PIPE)
 	# 	this will have to be expanded to account for different authentication scenarios
 	if essid:
 		w = WifiNetwork.query.filter(WifiNetwork.essid == essid).first()
@@ -74,13 +75,13 @@ def wifi_connect (essid="", password=""):
 
 def disconnect ():
 	a = run(args=["sudo", "/usr/bin/pkill", "wpa_supplicant"], stdout=PIPE)
-	b = run(args=["sudo", "ifconfig", "wlan1", "down"], stdout=PIPE)
-	c = run(args=["sudo", "ifconfig", "wlan1", "up"], stdout=PIPE)
+	b = run(args=["sudo", "ip", "link", "set", "wlan1", "down"], stdout=PIPE)
 
-	d = run(args=["sudo", "/sbin/iw", "dev", "wlan1", "link"], stdout=PIPE)
-	e = d.stdout.decode()
-	if "Not connected." in e:
+	c = run(args=["sudo", "/sbin/iw", "dev", "wlan1", "link"], stdout=PIPE)
+	d = c.stdout.decode()
+	if "Not connected." in d:
 		return True
+	else: return False
 
 def clear_config ():
 	c = disconnect()
@@ -105,7 +106,7 @@ def current_network ():
 	d = [a.split(":", 1) for a in c]
 
 	print(d)
-	
+
 	e = [a for a in d if len(a) > 1]
 
 
@@ -136,15 +137,16 @@ def fix_essid (cell):
 convert_pipeline = compose([fix_ie, fix_essid, dictify])
 
 def scan_networks ():
-	a = run(args=["sudo", "/sbin/iwlist", "wlan1", "scanning"], stdout=PIPE)
-	b = a.stdout.decode()
+	a = run(args=["sudo", "ip", "link", "set", "wlan1", "up"], stdout=PIPE)
+	b = run(args=["sudo", "/sbin/iwlist", "wlan1", "scanning"], stdout=PIPE)
+	c = a.stdout.decode()
 
-	c = b.split("Cell")
-	d = [a.split("\n") for a in c]
+	d = c.split("Cell")
+	e = [a.split("\n") for a in d]
 
 	d.pop(0)
 
-	networks = [convert_pipeline(a) for a in d]
+	networks = [convert_pipeline(a) for a in e]
 	networks = [a.to_dict(flat=False) for a in networks]
 
 	return networks
