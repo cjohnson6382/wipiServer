@@ -61,7 +61,7 @@ def reset():
 
 @main.route('/disconnect', methods=["GET"])
 @cross_origin()
-def disconnect():
+def disconnect_wifi():
 	status = disconnect()
 	return jsonify(status)
 
