@@ -53,20 +53,19 @@ def wifi_connect (essid="", password=""):
 	if essid:
 		w = WifiNetwork.query.filter(WifiNetwork.essid == essid).first()
 		if w:
+			r = False
 			if write_conf(w.essid, w.password):
-				connect()
-			if not r: return { "status": "failed to set wpa_supplicant.conf to %s" % w.essid }
-			if connect(): pass
-			else: return { "status": "failed to connect to %s" % w.essid }
+				if connect(): return { "status": "connected to %s" % w.essid}
+				else return { "status": "failed to connect to %s" % w.essid }
+			else: return { "status": "failed to set wpa_supplicant.conf to %s" % w.essid }
 		else: 
 			# if not password: return { "status": "cannot connect to %s; not saved and no password supplied" % essid }
 			if wifi_add(essid, password):
 				write_conf(essid, password)
-				if connect(): pass
+				if connect(): return { "status": "connected to %s" % essid}
 				else: return { "status": "failed to connect to %s" % essid }
 			else: return { "status": "failed to add wifi network to wpa_supplicant conf" }
-		
-		return { "status": "connected to %s" % essid }
+			
 	else: return { "status": "no ESSID provided; what network should I connect to?" }
 
 def disconnect ():
