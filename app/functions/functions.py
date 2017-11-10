@@ -70,10 +70,13 @@ def wifi_connect (essid="", password=""):
 	else: return { "status": "no ESSID provided; what network should I connect to?" }
 
 def disconnect ():
-	a = run(args=["sudo", "/usr/bin/killall", "wpa_supplicant"], stdout=PIPE)
-	b = run(args=["sudo", "/sbin/iw", "dev", "wlan1", "link"], stdout=PIPE)
-	c = b.stdout.decode()
-	if "Not connected." in c:
+	a = run(args=["sudo", "/usr/bin/pkill", "wpa_supplicant"], stdout=PIPE)
+	b = run(args=["sudo", "ifconfig", "wlan1", "down"], stdout=PIPE)
+	c = run(args=["sudo", "ifconfig", "wlan1", "up"], stdout=PIPE)
+	
+	d = run(args=["sudo", "/sbin/iw", "dev", "wlan1", "link"], stdout=PIPE)
+	e = d.stdout.decode()
+	if "Not connected." in e:
 		return True
 
 def clear_config ():
