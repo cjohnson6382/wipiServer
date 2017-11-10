@@ -44,12 +44,7 @@ def write_conf (essid, password):
 
 def connect ():
 	a = run(args=["sudo", "/sbin/wpa_supplicant", "-iwlan1", "-cwpa_supplicant.conf", "-B"], stdout=PIPE)
-
-	print("conenct, a: ", a)
-
 	b = a.stdout.decode()
-
-	print("connect, b: ", b)
 
 	if "Successfully initialized wpa_supplicant" in b: return True
 	else: return False
@@ -89,35 +84,19 @@ def clear_config ():
 	db.session.commit()
 
 	if c:
-		return { "status": "deleted all stored wifi networks" }
+		return { "status": "disconnected and deleted all stored wifi networks" }
 	else: 
-		return { "status": "" }
+		return { "status": "I do not even know; you suck at this" }
 
 def current_network ():
 	print("in current_network function")
 	a = run(args=["sudo", "/sbin/iw", "wlan1", "link"], stdout=PIPE)
-
-	print("a", a)
-
 	b = a.stdout.decode()
-
-	print("b", b)
-
 	c = b.split("\n")
-
-	print("c", c)
-
 	d = [a.split(":", 1) for a in c]
-
-	print("d", d)
-
 	e = [a for a in d if len(a) > 1]
 
-	print("e", e)
-
 	network = dict([(a[0].strip(), a[1].strip()) for a in e])
-
-	print("network", network)
 	return network
 
 ########################################################
