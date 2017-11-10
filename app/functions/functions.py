@@ -1,5 +1,7 @@
 import functools
 
+from app import db
+
 from subprocess import run
 from subprocess import PIPE
 
