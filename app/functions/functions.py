@@ -99,12 +99,19 @@ def current_network ():
 	a = run(args=["sudo", "/sbin/iwconfig", "wlan1"], stdout=PIPE)
 	b = a.stdout.decode()
 	c = b.split("\n")
+
+	print(c)
+
 	d = [a.split(":", 1) for a in c]
+
+	print(d)
+	
 	e = [a for a in d if len(a) > 1]
+
+
 
 	network = dict([(a[0].strip(), a[1].strip()) for a in e])
 
-	print(network)
 	return network
 
 ########################################################
