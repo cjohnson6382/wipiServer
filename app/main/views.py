@@ -39,7 +39,6 @@ def stored():
 #	@requires_auth
 @cross_origin()
 def current():
-	print("in current_network route")
 	status = current_network()
 
 	print(status)
