@@ -139,7 +139,7 @@ convert_pipeline = compose([fix_ie, fix_essid, dictify])
 def scan_networks ():
 	a = run(args=["sudo", "ip", "link", "set", "wlan1", "up"], stdout=PIPE)
 	b = run(args=["sudo", "/sbin/iwlist", "wlan1", "scanning"], stdout=PIPE)
-	c = a.stdout.decode()
+	c = b.stdout.decode()
 
 	d = c.split("Cell")
 	e = [a.split("\n") for a in d]
