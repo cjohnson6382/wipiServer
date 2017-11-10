@@ -23,7 +23,7 @@ def compose(functions):
 ########################################################
 def get_stored ():
 	r = WifiNetwork.query.all()
-	stored = [w.as_dict() for a in r]
+	stored = [w.as_dict() for w in r]
 	return stored
 
 def wifi_add (essid, password):
