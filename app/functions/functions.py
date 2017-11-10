@@ -44,6 +44,9 @@ def write_conf (essid, password):
 
 def connect ():
 	a = run(args=["sudo", "/sbin/wpa_supplicant", "-iwlan1", "-cwpa_supplicant.conf", "-B"], stdout=PIPE)
+
+	print(a)
+
 	b = a.stdout.decode()
 
 	if "Successfully initialized wpa_supplicant" in b: return True
@@ -73,7 +76,7 @@ def disconnect ():
 	a = run(args=["sudo", "/usr/bin/pkill", "wpa_supplicant"], stdout=PIPE)
 	b = run(args=["sudo", "ifconfig", "wlan1", "down"], stdout=PIPE)
 	c = run(args=["sudo", "ifconfig", "wlan1", "up"], stdout=PIPE)
-	
+
 	d = run(args=["sudo", "/sbin/iw", "dev", "wlan1", "link"], stdout=PIPE)
 	e = d.stdout.decode()
 	if "Not connected." in e:
