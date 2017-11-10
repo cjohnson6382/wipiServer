@@ -45,12 +45,12 @@ def write_conf (essid, password):
 def connect ():
 	a = run(args=["sudo", "/sbin/wpa_supplicant", "-i wlan1", "-c ./wpa_supplicant.conf", "-B"], stdout=PIPE)
 
-	console.log("conenct, a: ", a)
+	print("conenct, a: ", a)
 
 	b = a.stdout.decode()
 
-	console.log("connect, b: ", b)
-	
+	print("connect, b: ", b)
+
 	if "Successfully initialized wpa_supplicant" in b: return True
 	else: return False
 
