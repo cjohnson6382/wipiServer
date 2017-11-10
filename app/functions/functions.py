@@ -43,7 +43,7 @@ def write_conf (essid, password):
 	return True
 
 def connect ():
-	a = run(args=["sudo", "/sbin/wpa_supplicant", "-i wlan1", "-c ./wpa_supplicant.conf", "-B"], stdout=PIPE)
+	a = run(args=["sudo", "/sbin/wpa_supplicant", "-i wlan1", "-c /home/pi/wipiServer/wpa_supplicant.conf", "-B"], stdout=PIPE)
 
 	print("conenct, a: ", a)
 
