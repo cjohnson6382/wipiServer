@@ -26,6 +26,9 @@ def bundle(route):
 @cross_origin()
 def networks():
 	networks = scan_networks()
+
+	print('NETWORKS', networks)
+
 	return jsonify(networks)
 
 @main.route('/stored_networks', methods=["GET"])
