@@ -8,7 +8,7 @@ from flask_cors import cross_origin
 from app import db
 from app.main import main
 
-from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored, disconnect
+from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored, disconnect, wifi_add
 
 @main.route('/', methods=["GET"])
 @cross_origin()
@@ -53,6 +53,13 @@ def current():
 @cross_origin()
 def choose():
 	status = wifi_connect(**request.get_json())
+	return jsonify(status)
+
+@main.route('/save_network', methods=["POST"])
+#	@requires_auth
+@cross_origin()
+def save():
+	status = wifi_add(**request.get_json())
 	return jsonify(status)
 
 @main.route('/reset', methods=["GET"])

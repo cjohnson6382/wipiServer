@@ -97,11 +97,11 @@ def clear_config ():
 
 def current_network ():
 	print("in current_network function")
-	a = run(args=["sudo", "/sbin/iw", "wlan1", "link"], stdout=PIPE)
+	a = run(args=["sudo", "/sbin/iwconfig", "wlan1"], stdout=PIPE)
 	b = a.stdout.decode()
 	c = b.split("\n")
 
-	print(c)
+	print("CURRENT NETWORK FUNCTION: ", c)
 
 	d = [a.split(":", 1) for a in c]
 
