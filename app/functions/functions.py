@@ -31,6 +31,9 @@ def get_stored ():
 	return stored
 
 def wifi_add (essid, password=""):
+
+	print("ESSID, PASSWORD in wifi_add: ", essid, password)
+
 	w = WifiNetwork.query.get(essid)	
 	if w and password: 
 		print("network exists, changing password from %s to %s" % (w.password, password))
