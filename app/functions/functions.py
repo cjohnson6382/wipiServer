@@ -30,15 +30,15 @@ def get_stored ():
 
 	return stored
 
-def wifi_add (essid, password):
-	try: 
-		w = WifiNetwork({ "essid": essid, "password": password })
-		db.session.add(w)
-		db.session.commit()
-		return True
-	except Exception as e:
-		w = WifiNetwork.query.get(essid)
+def wifi_add (essid, password=""):
+	w = WifiNetwork.query.get(essid)	
+	if w and password: 
+		print("network exists, changing password from %s to %s" % (w.password, password))
 		w.password = password
+		return True
+	else:
+		print("network does not exist, saving network %s" % essid)
+		w = WifiNetwork({ "essid": essid, "password": password })
 		db.session.add(w)
 		db.session.commit()
 		return True
@@ -72,7 +72,7 @@ def wifi_connect (essid="", password=""):
 	a = run(args=["sudo", "ip", "link", "set", "wlan1", "up"], stdout=PIPE)
 	# 	this will have to be expanded to account for different authentication scenarios
 	if essid:
-		w = WifiNetwork.query.filter(WifiNetwork.essid == essid).first()
+		w = WifiNetwork.query.get(essid)
 		if w:
 			r = False
 			if write_conf(w.essid, w.password):
