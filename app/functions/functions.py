@@ -31,10 +31,17 @@ def get_stored ():
 	return stored
 
 def wifi_add (essid, password):
-	w = WifiNetwork({ "essid": essid, "password": password })
-	db.session.add(w)
-	db.session.commit()
-	return True
+	try: 
+		w = WifiNetwork({ "essid": essid, "password": password })
+		db.session.add(w)
+		db.session.commit()
+		return True
+	except Exception as e:
+		w = WifiNetwork.query.get(essid)
+		w.password = password
+		db.session.add(w)
+		db.session.commit()
+		return True
 
 def write_conf (essid, password):
 	a = run(args=["sudo", "/usr/bin/wpa_passphrase", essid, password], stdout=PIPE)
