@@ -9,8 +9,7 @@ class WifiNetwork(db.Model):
 	_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 	_updated = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 
-	id = db.Column(db.Integer, primary_key=True)
-	essid = db.Column(db.String(64), nullable=False)
+	essid = db.Column(db.String(64), nullable=False, primary_key=True)
 	password = db.Column(db.String(128))
 
 	def __init__(self, initial_data):
