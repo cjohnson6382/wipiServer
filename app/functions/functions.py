@@ -56,7 +56,12 @@ def connect ():
 	if "Successfully initialized wpa_supplicant" in b: return True
 	else: return False
 
+def get_network (essid):
+	a = run(args=["sudo", "iw", "link", "set", "wlan1", "up"], stdout=PIPE)
+
+
 def wifi_connect (essid="", password=""):
+	disconnect()
 	a = run(args=["sudo", "ip", "link", "set", "wlan1", "up"], stdout=PIPE)
 	# 	this will have to be expanded to account for different authentication scenarios
 	if essid:
@@ -78,6 +83,7 @@ def wifi_connect (essid="", password=""):
 	else: return { "status": "no ESSID provided; what network should I connect to?" }
 
 def disconnect ():
+	print("running disconnect")
 	a = run(args=["sudo", "/usr/bin/pkill", "wpa_supplicant"], stdout=PIPE)
 	b = run(args=["sudo", "ip", "link", "set", "wlan1", "down"], stdout=PIPE)
 
