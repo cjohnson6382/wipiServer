@@ -21,7 +21,7 @@ def create_app(config_name):
 		@app.before_request
 		def log_request():
 			current_app.logger.debug(request.path)
-			# current_app.logger.debug(request.environ)
+			current_app.logger.debug(request.environ)
 
 		db.init_app(app)
 
