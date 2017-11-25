@@ -16,7 +16,7 @@ if os.path.exists('.env'):
 						os.environ[var[0]] = var[1]
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
 
 """
 from app import create_app, db
