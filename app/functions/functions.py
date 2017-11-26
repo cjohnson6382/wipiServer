@@ -27,6 +27,8 @@ def email_address ():
 	with open("/home/pi/jobbox_email", "a+") as f:
 		email = f.read()
 
+		print("in register function, should be True", email)
+
 		if email: return email
 		else: return False
 
@@ -44,7 +46,6 @@ def register (uuid, email=""):
 
 	if len(email) > 2:
 		r = { "success": True }
-		print("in register function, should be True", r.get("success"))
 
 		url = "PLACEHOLDER"
 		# r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })

@@ -31,6 +31,9 @@ def register_email():
 @cross_origin()
 def email():
 	email = email_address()
+
+	print("Views email_address returned, should be a string not a bool: ", email)
+
 	return jsonify(email)
 
 @main.route('/serial_number', methods=["GET"])
