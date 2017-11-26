@@ -28,7 +28,7 @@ def email_address ():
 		if email: return email
 		else: return False
 
-def register (uuid="", email=""):
+def register (uuid, email=""):
 	print("register, args:", uuid, email)
 
 	if email:

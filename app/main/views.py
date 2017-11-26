@@ -26,7 +26,9 @@ def bundle(route):
 def register():
 	print(request.get_json())
 
-	status = register(**request.get_json())
+	params = request.get_json()
+
+	status = register(params.get("uuid"), params.get("email"))
 	return jsonify(status)
 
 @main.route('/email_address', methods=["GET"])
