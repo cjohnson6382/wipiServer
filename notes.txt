@@ -1,48 +1,21 @@
-MAKE A ROUTE FOR SERIAL_NUMBER
 
 
-Now we just gotta get the startup script working so that it can take the email address
+* Connect to internet -> check for /etc/jobbox/email (which just contains an email address) -> send to registration page if it's not there. 
+	- have the script that starts wifi connector check for email file and write it if it doesn't exist
+	- when the jumper shorted, delete the email file if it exists
 
 
-write it to /etc/jobbox/email
-create /etc/jobbox/email if it does not exist when we start the thing
-
-we need something to check that /etc/jobbox/email exists
-
+startup script will send email + serial number to server to check for authentication; 
+	- if auth credentials exist on the server, then startup proceeds as normal
+	- if auth credentails do not exist on the server, then they must be created
 
 
-Pi boots up for the first time, then is configured
+
+COMPLETE:
+* Pi boots up for the first time, then is configured
 	if they aren't configured after that, the configuration screen must show on the wifi connector homepage
 	after the user connects to something, test for an internet connection
 		if one exists, then hit the server with the email address
-
-Connect to internet -> check for /etc/jobbox/email (which just contains an email address) -> send to registration page if it's not there. 
-
-move the /etc/jobbox/email file to an app directory
-
-
-
-have the script that starts wifi connector check for email file and write it if it doesn't exist
-
-when the jumper shorted, delete the email file if it exists
-
-
-https://raspberrypi.stackexchange.com/questions/2086/how-do-i-get-the-serial-number
-what if we just pull the serial number and forget about the UUID
-
-
-
-when the Pi starts.....
-	doesn't matter if it's the first time or the 500th time
-	it hits the server with its serial number and the email address to authenticate
-	if the server responds with success, then the machine will assume that everything is working normally
-
-
-but if we get the 'not registered' response, we can just send the email up to the registration endpoint
-
-
-
-
 * this is how we get the email from the server:
 	- Pi will have an 'email' route on it
 	- when the user attempts the register, the frontend hits the Pi; the Pi is connected at this point
@@ -50,11 +23,13 @@ but if we get the 'not registered' response, we can just send the email up to th
 	- when the user jumps the pins on the Pi to reset config, this will blank the email config file
 	- next time they boot, the server will give them a 'not registered'
 
-
-
-
-
-
+* what if we just pull the serial number and forget about the UUID
+	- https://raspberrypi.stackexchange.com/questions/2086/how-do-i-get-the-serial-number
+* move the /etc/jobbox/email file to an app directory
+* we need something to check that /etc/jobbox/email exists
+	write it to /etc/jobbox/email
+	create /etc/jobbox/email if it does not exist when we start the thing
+* MAKE A ROUTE FOR SERIAL_NUMBER
 
 
 

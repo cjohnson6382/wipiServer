@@ -44,6 +44,8 @@ def register (uuid, email=""):
 
 	if len(email) > 2:
 		r = { "success": True }
+		print("in register function, should be True", r.get("success"))
+
 		url = "PLACEHOLDER"
 		# r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 		return r.get("success")
