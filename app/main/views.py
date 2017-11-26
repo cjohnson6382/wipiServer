@@ -39,7 +39,7 @@ def serial():
 
 	print(serial)
 
-	return serial
+	return jsonify(serial)
 
 @main.route('/get_networks', methods=["GET"])
 #	@requires_auth
