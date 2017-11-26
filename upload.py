@@ -11,12 +11,22 @@ import pathlib
 bucket_name = 'pdf-dev-learning'
 s3 = boto3.resource('s3')
 
+#       all the places the system scans to find pdfs
+source_dirs = [
+        '/var/spool/cups-pdf/ANONYMOUS/',
+        '/var/spool/cups-pdf/JOBBOX/',
+        '/home/PDF/',
+        '/var/spool/cups-pdf/ANONYMOUS/'
+]
 
-#       helper functions        #
+
+#       HELPER FUNCTIONS        #
 
 #       takes a file path and returns the email address stored in that file
 def get_email (email_file):
         email = ""
+
+        #       this is a default option for debugging; do not hardcode emails in production scripts
         if not email_file: 
                 email = "jason.s.trager@gmail.com"
                 print("setting email to the default value; should NEVER get here!!!")
@@ -34,11 +44,13 @@ def get_email (email_file):
 def upload_pdf (pdf):
         data = pdf.open(mode='rb')
         name = pdf.name
-        # why is this here? 
+        
         s3.Bucket(bucket_name).put_object(ACL='public-read', Key=name, Body=data, ContentType='pdf')
         url = 'https://%s.s3.amazonaws.com/%s' % (bucket_name, name)
         body = {'email': email, 'url': url, 'name': name, 'bucket': bucket_name}
         r = requests.post('https://job-box-server.herokuapp.com/api/pdfs/testing123', body)
+
+        #       archive the PDF in the hidden .archived directory
         archive = pdf.parent.joinpath('.archived')
         if archive.is_dir():
                 archived_file = archive.joinpath(pdf.name)
@@ -49,7 +61,6 @@ def upload_pdf (pdf):
                 archived_file = archive.joinpath(pdf.name)
                 archived_file.write_bytes(pdf.open(mode='rb').read())
                 pdf.unlink()
-        
 
 
 #       get file paths from a source directory path
@@ -58,13 +69,6 @@ def source_to_paths (source_dir):
         file_paths = [p.absolute() for p in gen if p.is_file() and (p.match('*.pdf') or p.match('*.PDF') or p.match('*.Pdf'))]
         return file_paths
 
-#       all the places the system scans to find pdfs
-source_dirs = [
-        '/var/spool/cups-pdf/ANONYMOUS/',
-        '/var/spool/cups-pdf/JOBBOX/',
-        '/home/PDF/',
-        '/var/spool/cups-pdf/ANONYMOUS/'
-]
 
 #       get the paths of all non-hidden files/directories in the source_dirs
 pdfs = reduce((lambda x, y: x + y), [source_to_paths(s) for s in source_dirs])
