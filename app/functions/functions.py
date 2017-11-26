@@ -40,7 +40,7 @@ def register (uuid, email=""):
 		email = f.read()
 		f.close()
 
-	if len(email > 2):
+	if len(len(email) > 2):
 		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 		return r.get("success")
 	else:
