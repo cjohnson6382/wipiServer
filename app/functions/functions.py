@@ -24,10 +24,10 @@ def compose(functions):
 ########################################################
 
 def email_address ():
-	with open("/home/pi/jobbox_email", "a+") as f:
+	with open("/home/pi/jobbox_email", "r+") as f:
 		email = f.read()
 
-		print("in register function, should be True", email)
+		print("in email_address function, should be a string:", email)
 
 		if email: return email
 		else: return False
