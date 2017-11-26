@@ -30,10 +30,7 @@ def register():
 @cross_origin()
 def email():
 	email = email_address()
-
-	print("returning email: %s" % email)
-
-	return jsonify({ 'status': email })
+	return jsonify(email)
 
 @main.route('/serial_number', methods=["GET"])
 @cross_origin()
