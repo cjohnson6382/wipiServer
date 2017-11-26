@@ -22,7 +22,7 @@ def compose(functions):
 ########################################################
 
 def email_address ():
-	with open("/home/pi/jobbox_email", "r+") as f:
+	with open("/home/pi/jobbox_email", "a+") as f:
 		email = f.read()
 		if email: return email
 		else: return False
