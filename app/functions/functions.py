@@ -29,6 +29,8 @@ def email_address ():
 		else: return False
 
 def register (uuid, email=""):
+	print("register, args:", uuid, email)
+
 	if email:
 		f = open("/home/pi/jobbox_email", "w")
 		f.write(email)
