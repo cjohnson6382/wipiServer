@@ -2,8 +2,7 @@ import functools
 
 from app import db
 
-from subprocess import run
-from subprocess import PIPE
+from subprocess import run, Popen, PIPE
 
 from app.models import WifiNetwork
 
@@ -21,6 +20,45 @@ def compose(functions):
 # https://wiki.archlinux.org/index.php/WPA_supplicant#Connecting_with_wpa_cli
 
 ########################################################
+
+def email_address ():
+	f = open("/home/pi/jobbox_email", "r")
+	email = f.read()
+	if email: return email
+	else: return False	
+
+def register (uuid, email=""):
+	if email:
+		f = open("/home/pi/jobbox_email", "w")
+		f.write(email)
+		f.close()
+	else:
+		f = open("/home/pi/jobbox_email", "w")
+		email = f.read()
+		f.close()
+
+	if len(email > 2):
+		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
+		return r.get("success")
+	else:
+		print("no email address provided and no saved email exists")
+		return False
+
+
+
+
+def get_serial ():
+	a = Popen(args=["cat", "/proc/cpuinfo"], stdout=PIPE)
+	b = Popen(args=["grep", "Serial"], stdin=a.stdout, stdout=PIPE)
+
+	a.stdout.close()
+
+	s = b.communicate()[0]
+	serial = s.decode().split(":")[1].strip()
+
+	return serial
+
+
 def get_stored ():
 	r = WifiNetwork.query.all()
 

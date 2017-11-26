@@ -8,7 +8,7 @@ from flask_cors import cross_origin
 from app import db
 from app.main import main
 
-from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored, disconnect, wifi_add
+from app.functions.functions import scan_networks, wifi_connect, clear_config, current_network, get_stored, disconnect, wifi_add, get_serial, email_address, register
 
 @main.route('/', methods=["GET"])
 @cross_origin()
@@ -20,6 +20,25 @@ def root():
 def bundle(route):
 	return url_for("static", filename=route)
 
+
+@main.route('/register', methods=["POST"])
+@cross_origin()
+def register():
+	return register(**request.get_json())
+
+@main.route('/email_address', methods=["GET"])
+@cross_origin()
+def email():
+	return email_address()
+
+@main.route('/serial_number', methods=["GET"])
+@cross_origin()
+def serial():
+	serial = get_serial()
+
+	print(serial)
+
+	return serial
 
 @main.route('/get_networks', methods=["GET"])
 #	@requires_auth
