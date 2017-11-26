@@ -29,7 +29,11 @@ def register():
 @main.route('/email_address', methods=["GET"])
 @cross_origin()
 def email():
-	return email_address()
+	email = email_address()
+
+	print("returning email: %s" % email)
+
+	return email
 
 @main.route('/serial_number', methods=["GET"])
 @cross_origin()
