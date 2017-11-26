@@ -23,12 +23,8 @@ def bundle(route):
 
 @main.route('/register', methods=["POST"])
 @cross_origin()
-def register():
-	print(request.get_json())
-
-	params = request.get_json()
-
-	status = register(params.get("uuid"), params.get("email"))
+def register_email():
+	status = register(**request.get_json())
 	return jsonify(status)
 
 @main.route('/email_address', methods=["GET"])
