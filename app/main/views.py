@@ -24,6 +24,8 @@ def bundle(route):
 @main.route('/register', methods=["POST"])
 @cross_origin()
 def register():
+	print(**request.get_json())
+
 	status = register(**request.get_json())
 	return jsonify(status)
 
