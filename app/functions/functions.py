@@ -22,10 +22,10 @@ def compose(functions):
 ########################################################
 
 def email_address ():
-	f = open("/home/pi/jobbox_email", "r")
-	email = f.read()
-	if email: return email
-	else: return False	
+	with open("/home/pi/jobbox_email", "r+") as f:
+		email = f.read()
+		if email: return email
+		else: return False
 
 def register (uuid, email=""):
 	if email:
