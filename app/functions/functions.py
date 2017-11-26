@@ -8,6 +8,8 @@ from app.models import WifiNetwork
 
 from werkzeug.datastructures import MultiDict
 
+import requests
+
 def compose(functions):
 	if (len(functions) > 1):
 		return functools.reduce(lambda f, g: lambda x: f(g(x)), functions, lambda x: x)
@@ -41,7 +43,9 @@ def register (uuid, email=""):
 		f.close()
 
 	if len(email) > 2:
-		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
+		r = { "success": True }
+		url = "PLACEHOLDER"
+		# r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 		return r.get("success")
 	else:
 		print("no email address provided and no saved email exists")
