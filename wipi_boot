@@ -30,9 +30,9 @@ SCRIPTNAME=/etc/init.d/$NAME
 
 case "$1" in
 start)
-	printf "%-50s" "Starting WiPi polling script..."
-	cd $DAEMON_PATH
-	python3.5 wipi_start.py 2>&1 & echo $1
+	# printf "%-50s" "Starting WiPi polling script..."
+	# cd $DAEMON_PATH
+	# python3.5 wipi_start.py 2>&1 & echo $1
 
 	printf "%-50s" "Starting $NAME..."
 	cd $DAEMON_PATH
