@@ -30,11 +30,11 @@ start)
 	printf "%-50s" "Starting $NAME..."
     cd /var/spool/cups-pdf/ANONYMOUS
     `$DAEMON $DAEMONOPTS > /dev/null 2>&1 echo $!`
-    echo "watchman watching /var/spool/cups-pdf/ANONYMOUS for new PDF files"
+    printf "%-50s" "watchman watching /var/spool/cups-pdf/ANONYMOUS for new PDF files"
 
     cd /var/spool/cups-pdf/JOBBOX
     `$DAEMON $DAEMONOPTS > /dev/null 2>&1 echo $!`
-    echo "watchman watching /var/spool/cups-pdf/JOBBOX for new PDF files"
+    printf "%-50s" "watchman watching /var/spool/cups-pdf/JOBBOX for new PDF files"
 ;;
 stop)
     pkill watchman
