@@ -203,6 +203,8 @@ def current_network ():
 
 	network = {**l, **m}
 
+	print("in current_network function, network: ", network)
+
 	return network
 
 ########################################################
