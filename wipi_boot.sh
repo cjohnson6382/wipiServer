@@ -4,13 +4,13 @@
 # description: wipi_boot daemon
 # processname: wipi_boot
 
-
-
 #	http://werxltd.com/wp/2012/01/05/simple-init-d-script-template/
 
-# cp wipi_boot.sh /etc/init.d/
+# sudo cp wipi_boot.sh /etc/init.d/
+# sudo update-rc.d wipi_boot defaults
 
-# update-rc.d wipi_boot defaults
+#	starts script at runlevels 3, 4, 5 at low priority and stops it at high priority in 1 and 6
+# sudo update-rc.d wipi_boot start 90 3 4 5 . stop 10 1 6 . 
 
 DAEMON=gunicorn
 DAEMONOPTS="-b 0.0.0.0:8888 autoapp:app"
@@ -42,7 +42,7 @@ stop)
             PID=`cat $PIDFILE`
             cd $DAEMON_PATH
         if [ -f $PIDFILE ]; then
-            kill -HUP $PID
+            sudo kill -HUP $PID
             printf "%s\n" "Ok"
             rm -f $PIDFILE
         else
