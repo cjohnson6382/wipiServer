@@ -38,11 +38,12 @@ start)
         fi
 ;;
 stop)
-		PID=`cat $PIDFILE`
-        printf "%-50s" "Stopping $NAME with PID $PID"    
+        
         cd $DAEMON_PATH
         if [ -f $PIDFILE ]; then
-            sudo kill -HUP $PID
+        	PID=`cat $PIDFILE`
+        	printf "%-50s" "Stopping $NAME with PID $PID"
+            sudo kill $PID
             printf "%s\n" "Ok"
             rm -f $PIDFILE
         else
