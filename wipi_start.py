@@ -44,13 +44,13 @@ def check_and_register ():
 	print("email uuid, url used for check/new: ", email, uuid, url)
 
 	if email:
-		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
+		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }))
 		status = r.json()
 		print("check and register after hitting 'check' device route", status)
 
 		if not status.get("success"):
 			url = BASE_URL + "new"
-			s = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
+			s = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }))
 			status = s.json()
 
 			print("check and register after hitting 'new' device route", status)
