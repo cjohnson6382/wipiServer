@@ -43,10 +43,12 @@ def check_and_register ():
 
 	if email:
 		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
-		if not r.get("success"):
+		status = r.json()
+		if not status.get("success"):
 			url = BASE_URL + "new"
 			s = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
-			if not s.get("success"): 
+			status = s.json()
+			if not status.get("success"): 
 				time.sleep(5)
 				polling()
 	else:
