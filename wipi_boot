@@ -24,6 +24,7 @@ SCRIPTNAME=/etc/init.d/$NAME
 
 case "$1" in
 start)
+	printf "%-50s" "Starting WiPi polling script..."
 	printf "%-50s" "Starting $NAME..."
 	cd $DAEMON_PATH
     source ./bin/activate

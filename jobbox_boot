@@ -1,0 +1,87 @@
+#!/bin/bash
+# jobbox_boot daemon
+# chkconfig: 345 20 80
+# description: jobbox_boot daemon
+# processname: jobbox_boot
+
+#	http://werxltd.com/wp/2012/01/05/simple-init-d-script-template/
+
+# sudo cp jobbox_boot /etc/init.d/
+
+#	starts script at runlevels 3, 4, 5 at low priority and stops it at high priority in 1 and 6
+# sudo update-rc.d jobbox_boot start 90 3 4 5 . stop 10 1 6 . 
+
+
+
+## sudo update-rc.d jobbox_boot defaults
+
+export AWS_ACCESS_KEY_ID=AKIAIBPZ7TTPXXJWSYNQ
+export AWS_SECRET_ACCESS_KEY=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
+
+DAEMON=gunicorn
+DAEMONOPTS="-b 0.0.0.0:8888 autoapp:app"
+
+DAEMON_PATH="/home/pi/wipiServer"
+
+NAME=jobbox_boot
+DESC="JobBox boot script"
+PIDFILE1=/var/run/jb_anonymous.pid
+PIDFILE2=/var/run/jb_jobbox.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+case "$1" in
+start)
+	printf "%-50s" "Starting $NAME..."
+    cd /var/spool/cups-pdf/ANONYMOUS
+    PID1=`sudo watchman-make -p '*.pdf' --run 'python3.5 ~/jobbox_scripts/upload.py' > /dev/null 2>&1 echo $!`
+    echo "Saving PID" $PID1 " to " $PIDFILE1
+        if [ -z $PID1 ]; then
+            printf "%s\n" "Fail"
+        else
+            echo $PID1 > $PIDFILE1
+            printf "%s\n" "Ok"
+        fi
+
+    cd /var/spool/cups-pdf/JOBBOX
+    PID2=`sudo watchman-make -p '*.pdf' --run 'python ~/jobbox_scripts/upload.py' > /dev/null 2>&1 echo $!`
+    echo "Saving PID" $PID2 " to " $PIDFILE2
+        if [ -z $PID2 ]; then
+            printf "%s\n" "Fail"        
+        else
+            echo $PID2 > $PIDFILE2
+            printf "%s\n" "Ok"
+        fi
+;;
+stop)
+        
+        cd $DAEMON_PATH
+        if [ -f $PIDFILE1 ]; then
+        	PID1=`cat $PIDFILE1`
+        	printf "%-50s" "Stopping $NAME with PID $PID1"
+            sudo kill $PID1
+            printf "%s\n" "Ok"
+            rm -f $PIDFILE1
+        else
+            printf "%s\n" "pidfile not found"
+        fi
+
+        cd $DAEMON_PATH
+        if [ -f $PIDFILE2 ]; then
+            PID1=`cat $PIDFILE2`
+            printf "%-50s" "Stopping $NAME with PID $PID2"
+            sudo kill $PID2
+            printf "%s\n" "Ok"
+            rm -f $PIDFILE2
+        else
+            printf "%s\n" "pidfile not found"
+        fi        
+;;
+restart)
+  	$0 stop
+  	$0 start
+;;
+
+*)
+        echo "Usage: $0 {status|start|stop|restart}"
+        exit 1
+esac
