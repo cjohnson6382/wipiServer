@@ -41,7 +41,7 @@ def check_and_register ():
 	email = get_email()
 	uuid = get_serial()
 
-	print("email and uuid used for check/new: ", email, uuid)
+	print("email uuid, url used for check/new: ", email, uuid, url)
 
 	if email:
 		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
