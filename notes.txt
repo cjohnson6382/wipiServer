@@ -1,5 +1,17 @@
 
 
+TODO:
+* copy the jobbox_boot script into /etc/init.d; add it to the appropriate runlevels
+	- test the jobbox_boot script
+* write wipi_start.py script into the wipi_boot script
+	- test
+
+
+
+
+
+
+
 * Connect to internet -> check for /etc/jobbox/email (which just contains an email address) -> send to registration page if it's not there. 
 	- have the script that starts wifi connector check for email file and write it if it doesn't exist
 	- when the jumper shorted, delete the email file if it exists

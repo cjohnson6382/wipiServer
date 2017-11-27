@@ -5,8 +5,8 @@ import json
 
 from subprocess import Popen, PIPE
 
-
 BASE_URL = 'https://job-box-server.herokuapp.com/api/devices/'
+# BASE_URL = 'https://job-box-server.herokuapp.com/api/devices/'
 
 def is_connected ():
 	try: 
@@ -41,6 +41,8 @@ def check_and_register ():
 	email = get_email()
 	uuid = get_serial()
 
+	print("email and uuid used for check/new: ", email, uuid)
+
 	if email:
 		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 		status = r.json()
@@ -50,7 +52,7 @@ def check_and_register ():
 			url = BASE_URL + "new"
 			s = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 			status = s.json()
-			
+
 			print("check and register after hitting 'new' device route", status)
 			if not status.get("success"): 
 				time.sleep(5)
