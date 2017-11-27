@@ -28,7 +28,7 @@ start)
 	cd $DAEMON_PATH
     source ./bin/activate
     source .env	
-	PID=`$DAEMON $DAEMONOPTS > /dev/null 2>&1 & echo $!`
+	PID=`sudo $DAEMON $DAEMONOPTS > /dev/null 2>&1 & echo $!`
 	echo "Saving PID" $PID " to " $PIDFILE
         if [ -z $PID ]; then
             printf "%s\n" "Fail"
@@ -38,9 +38,9 @@ start)
         fi
 ;;
 stop)
-        printf "%-50s" "Stopping $NAME"
-            PID=`cat $PIDFILE`
-            cd $DAEMON_PATH
+		PID=`cat $PIDFILE`
+        printf "%-50s" "Stopping $NAME with PID $PID"    
+        cd $DAEMON_PATH
         if [ -f $PIDFILE ]; then
             sudo kill -HUP $PID
             printf "%s\n" "Ok"
