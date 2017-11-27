@@ -48,7 +48,7 @@ def register (uuid, email=""):
 
 	if len(email) > 2:
 		url = JOBBOX_BASE_URL + "new"
-		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
+		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "content-type": "application/json" })
 
 		print(r.json())
 
