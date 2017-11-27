@@ -119,6 +119,11 @@ def connect ():
 
 	b = a.stdout.decode()
 
+	c = run(args=["sudo", "/sbin/dhclient", "wlan1"], stdout=PIPE)
+	d = c.stdout.decode()
+
+	print("output of dhclient on wlan1:", d)
+
 	if "Successfully initialized wpa_supplicant" in b: return True
 	else: return False
 
@@ -186,8 +191,17 @@ def current_network ():
 	e = [a for a in d if len(a) > 1]
 
 
+	f = run(args=["ip", "addr", "show", "wlan1"], stdout=PIPE)
+	g = f.stdout.decode()
+	h = g.split("\n")
+	i = filter(lambda x: "inet" in x, h)
+	j = [a.strip() for a in i]
+	k = [a.split(" ", 1) for a in j]
+	l = dict(k)
 
-	network = dict([(a[0].strip(), a[1].strip()) for a in e])
+	m = dict([(a[0].strip(), a[1].strip()) for a in e])
+
+	network = {**l, **m}
 
 	return network
 

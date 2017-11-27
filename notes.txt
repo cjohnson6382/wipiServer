@@ -1,29 +1,25 @@
 
 
 TODO:
-* copy the jobbox_boot script into /etc/init.d; add it to the appropriate runlevels
-	- test the jobbox_boot script
-* write wipi_start.py script into the wipi_boot script
-	- test
+* run dhclient when the Pi connects wlan1 to a network
+* add "ifconfig wlan1" output to the frontend so user can tell what IP they have on their Pi 
+* when the jumper shorted, delete the email file if it exists
 
 
-
-
-
-
-
-* Connect to internet -> check for /etc/jobbox/email (which just contains an email address) -> send to registration page if it's not there. 
-	- have the script that starts wifi connector check for email file and write it if it doesn't exist
-	- when the jumper shorted, delete the email file if it exists
-
-
-startup script will send email + serial number to server to check for authentication; 
-	- if auth credentials exist on the server, then startup proceeds as normal
-	- if auth credentails do not exist on the server, then they must be created
 
 
 
 COMPLETE:
+* Connect to internet -> check for /etc/jobbox/email (which just contains an email address) -> send to registration page if it's not there. 
+	- have the script that starts wifi connector check for email file and write it if it doesn't exist
+* startup script will send email + serial number to server to check for authentication; 
+	- if auth credentials exist on the server, then startup proceeds as normal
+	- if auth credentails do not exist on the server, then they must be created
+
+* copy the jobbox_boot script into /etc/init.d; add it to the appropriate runlevels
+	- test the jobbox_boot script
+* write wipi_start.py script into the wipi_boot script
+	- test
 * Pi boots up for the first time, then is configured
 	if they aren't configured after that, the configuration screen must show on the wifi connector homepage
 	after the user connects to something, test for an internet connection
