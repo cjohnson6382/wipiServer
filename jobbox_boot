@@ -24,8 +24,6 @@ export AWS_SECRET_ACCESS_KEY=pkCSY9xz5gwpKVuvjiUlcHdosuY1Tyxo5cnRvmrS
 DAEMON=watchman-make
 DAEMONOPTS="-p '*.pdf' --run 'python3.5 ~/jobbox_scripts/upload.py'"
 
-DAEMON_PATH="/home/pi/wipiServer"
-
 NAME=jobbox_boot
 DESC="JobBox boot script"
 PIDFILE1=/var/run/jb_anonymous.pid

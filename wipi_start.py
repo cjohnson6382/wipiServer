@@ -3,10 +3,31 @@ import time
 import requests
 import json
 
+import RPi.GPIO as GPIO
+from pathlib import Path
+
+
 from subprocess import Popen, PIPE
 
 BASE_URL = 'https://job-box-server.herokuapp.com/api/devices/'
-# BASE_URL = 'https://job-box-server.herokuapp.com/api/devices/'
+
+
+def reset_email ():
+	GPIO.setmode(GPIO.BOARD) #set the GPIO pins to work as numbered on the board
+
+	reset_pin = 40 #This is the pin that is read to determine if the system needs to be reset
+	high_pin = 38 #This is the pin that supplies a high signal to indicate reset
+	GPIO.setup(high_pin, GPIO.OUT, initial=1) #Initial state of high_pin is high
+	GPIO.setup(reset_pin, GPIO.IN, GPIO.PUD_DOWN) # reset pin is loaded with pull down
+
+	print("the state of the reset pin is: %s (1 will clear the email registered to this device)" % GPIO.input(reset_pin)) #Check the state of the set pin
+
+	if(GPIO.input(reset_pin)==1):
+		p = Path('/home/pi/jobbox_email')
+		if p.is_file():
+			p.unlink()
+
+	GPIO.cleanup()
 
 def is_connected ():
 	try: 
@@ -71,5 +92,8 @@ def polling ():
 
 	check_and_register()
 	return
-		
+
+reset_email()	
 polling()
+
+
