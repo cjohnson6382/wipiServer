@@ -50,7 +50,8 @@ start)
 stop)
         
         cd $DAEMON_PATH
-        pkill $NAME
+        echo "killing wipi_start"
+        pkill wipi_start
         if [ -f $PIDFILE ]; then
         	PID=`cat $PIDFILE`
         	printf "%-50s" "Stopping $NAME with PID $PID"
