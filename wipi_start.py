@@ -3,6 +3,8 @@ import time
 import requests
 from subprocess import Popen, PIPE
 
+BASE_URL = 'https://job-box-server.herokuapp.com/api/devices/'
+
 def is_connected ():
 	try: 
 		socket.create_connection(("www.google.com", 80))
@@ -31,7 +33,7 @@ def get_email ():
 		else: return False
 
 def check_and_register ():
-	url = "http://www.herokuapp.jobbox.com/api/devices/check"
+	url = BASE_URL + "check"
 
 	email = get_email()
 	uuid = get_serial()
@@ -39,11 +41,14 @@ def check_and_register ():
 	if email:
 		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 		if not r.success:
-			url = "http://www.herokuapp.jobbox.com/api/devices/new"
+			url = BASE_URL + "new"
 			s = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 			if not s.success: 
 				time.sleep(5)
 				polling()
+	else:
+		print("this Pi is not associated with an email address; giving up")
+		pass
 
 
 def polling ():

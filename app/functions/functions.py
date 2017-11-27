@@ -10,6 +10,8 @@ from werkzeug.datastructures import MultiDict
 
 import requests
 
+JOBBOX_BASE_URL = "https://job-box-server.herokuapp.com/api/devices/"
+
 def compose(functions):
 	if (len(functions) > 1):
 		return functools.reduce(lambda f, g: lambda x: f(g(x)), functions, lambda x: x)
@@ -45,11 +47,17 @@ def register (uuid, email=""):
 		f.close()
 
 	if len(email) > 2:
-		r = { "success": True }
+		url = JOBBOX_BASE_URL + "new"
+		r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
 
-		url = "PLACEHOLDER"
-		# r = requests.post(url, data=json.dumps({ "email": email, "uuid": uuid }), headers={ "accept": "application/json" })
-		return r.get("success")
+		print(r.json())
+
+		if r.status_code == 201: response = r.json()
+		else: 
+			print("Registration failed for some reason; maybe try again?")
+			raise Exception("Registration failed for some reason; maybe try again?")
+
+		return response.get("success")
 	else:
 		print("no email address provided and no saved email exists")
 		return False
