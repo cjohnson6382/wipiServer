@@ -57,6 +57,9 @@ def check_and_register ():
 			if not status.get("success"): 
 				time.sleep(5)
 				polling()
+
+		else:
+			pass
 	else:
 		print("this Pi is not associated with an email address; giving up")
 		pass
