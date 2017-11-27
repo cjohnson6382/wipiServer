@@ -1,8 +1,15 @@
 #!/bin/bash
-# wipi_boot daemon
-# chkconfig: 345 20 80
-# description: wipi_boot daemon
-# processname: wipi_boot
+
+### BEGIN INIT INFO
+# Provides:          wipi_boot
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start wipi services at boot
+# Description:       Starts the wipiServer and the polling script
+### END INIT INFO
+
 
 #	http://werxltd.com/wp/2012/01/05/simple-init-d-script-template/
 

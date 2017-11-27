@@ -1,8 +1,15 @@
 #!/bin/bash
-# jobbox_boot daemon
-# chkconfig: 345 20 80
-# description: jobbox_boot daemon
-# processname: jobbox_boot
+
+### BEGIN INIT INFO
+# Provides:          jobbox_boot
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start jobbox services at boot
+# Description:       Starts the jobbox watchman that uploads pdfs to the server
+### END INIT INFO
+
 
 #	http://werxltd.com/wp/2012/01/05/simple-init-d-script-template/
 
