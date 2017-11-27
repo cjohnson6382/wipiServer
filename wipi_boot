@@ -6,9 +6,8 @@
 
 #	http://werxltd.com/wp/2012/01/05/simple-init-d-script-template/
 
+#   DO THESE COMMANDS OUTSIDE OF A VIRTUALENV
 # sudo cp wipi_boot.sh /etc/init.d/
-# sudo update-rc.d wipi_boot defaults
-
 #	starts script at runlevels 3, 4, 5 at low priority and stops it at high priority in 1 and 6
 # sudo update-rc.d wipi_boot start 90 3 4 5 . stop 10 1 6 . 
 
