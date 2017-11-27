@@ -14,8 +14,8 @@
 export AWS_ACCESS_KEY_ID=AKIAIBPZ7TTPXXJWSYNQ
 export AWS_SECRET_ACCESS_KEY=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
 
-DAEMON=gunicorn
-DAEMONOPTS="-b 0.0.0.0:8888 autoapp:app"
+DAEMON=watchman-make
+DAEMONOPTS="-p '*.pdf' --run 'python3.5 ~/jobbox_scripts/upload.py'"
 
 DAEMON_PATH="/home/pi/wipiServer"
 
@@ -29,7 +29,7 @@ case "$1" in
 start)
 	printf "%-50s" "Starting $NAME..."
     cd /var/spool/cups-pdf/ANONYMOUS
-    PID1=`watchman-make -p '*.pdf' --run 'python3.5 ~/jobbox_scripts/upload.py' > /dev/null 2>&1 echo $!`
+    PID1=`$DAEMON $DAEMONOPTS > /dev/null 2>&1 echo $!`
     echo "Saving PID" $PID1 " to " $PIDFILE1
         if [ -z $PID1 ]; then
             printf "%s\n" "Fail"
@@ -39,7 +39,7 @@ start)
         fi
 
     cd /var/spool/cups-pdf/JOBBOX
-    PID2=`watchman-make -p '*.pdf' --run 'python ~/jobbox_scripts/upload.py' > /dev/null 2>&1 echo $!`
+    PID2=`$DAEMON $DAEMONOPTS > /dev/null 2>&1 echo $!`
     echo "Saving PID" $PID2 " to " $PIDFILE2
         if [ -z $PID2 ]; then
             printf "%s\n" "Fail"        
