@@ -24,6 +24,9 @@ SCRIPTNAME=/etc/init.d/$NAME
 case "$1" in
 start)
 	printf "%-50s" "Starting WiPi polling script..."
+	cd $DAEMON_PATH
+	python3.5 wipi_start.py
+
 	printf "%-50s" "Starting $NAME..."
 	cd $DAEMON_PATH
     source ./bin/activate
@@ -40,6 +43,7 @@ start)
 stop)
         
         cd $DAEMON_PATH
+        pkill $NAME
         if [ -f $PIDFILE ]; then
         	PID=`cat $PIDFILE`
         	printf "%-50s" "Stopping $NAME with PID $PID"
