@@ -62,7 +62,8 @@ def register (uuid, email=""):
 		if r.status_code == 201: response = r.json()
 		else: 
 			print("Registration failed for some reason; maybe try again?")
-			raise Exception("Registration failed for some reason; maybe try again?")
+			return True
+			# raise Exception("Registration failed for some reason; maybe try again?")
 
 		return response.get("success")
 	else:
