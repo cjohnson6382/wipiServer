@@ -34,10 +34,10 @@ def email_address ():
 
 			if email: return email
 			else: return False
-	except IOError: 
+	except Exception as e: 
 		with open("/home/pi/jobbox_email", "w") as f:
 			f.close()
-			
+
 		return False
 
 def register (uuid, email=""):
