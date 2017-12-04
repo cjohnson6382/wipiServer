@@ -26,13 +26,15 @@ def compose(functions):
 ########################################################
 
 def email_address ():
-	with open("/home/pi/jobbox_email", "r+") as f:
-		email = f.read()
+	try:
+		with open("/home/pi/jobbox_email", "r+") as f:
+			email = f.read()
 
-		print("in email_address function, should be a string:", email)
+			print("in email_address function, should be a string:", email)
 
-		if email: return email
-		else: return False
+			if email: return email
+			else: return False
+	except IOError: return False
 
 def register (uuid, email=""):
 	print("register, args:", uuid, email)
