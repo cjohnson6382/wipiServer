@@ -30,9 +30,10 @@ SCRIPTNAME=/etc/init.d/$NAME
 
 case "$1" in
 start)
-    `sudo /sbin/wpa_supplicant -iwlan1 -c$DAEMON_PATH/wpa_supplicant.conf -B > /home/pi/wpas_log`
+    cd $DAEMON_PATH
+    `sudo /sbin/wpa_supplicant -iwlan1 -cwpa_supplicant.conf -B > /home/pi/wpas_log`
 	printf "%-50s" "Starting $NAME..."
-	cd $DAEMON_PATH
+
     source ./bin/activate
     source .env	
 	PID=`sudo $DAEMON $DAEMONOPTS > /dev/null 2>&1 & echo $!`
