@@ -21,7 +21,7 @@ export AWS_ACCESS_KEY_ID=AKIAIBPZ7TTPXXJWSYNQ
 export AWS_SECRET_ACCESS_KEY=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
 
 DAEMON=watchman-make
-DAEMONOPTS="-p '*.pdf' --run 'python3.5 ~/jobbox_scripts/upload.py'"
+DAEMONOPTS="-p '*.pdf' --run 'python3.5 /home/pi/jobbox_scripts/upload.py'"
 
 NAME=jobbox_boot
 DESC="JobBox boot script"
@@ -34,7 +34,7 @@ start)
 	echo "Starting $NAME..."
     cd /var/spool/cups-pdf/ANONYMOUS
     # `$DAEMON $DAEMONOPTS > /dev/null 2>&1 echo $!`
-    `$DAEMON $DAEMONOPTS > /home/pi/watchman_log 2>&1`
+    `$DAEMON $DAEMONOPTS &> /home/pi/watchman_log`
     echo "watchman watching /var/spool/cups-pdf/ANONYMOUS for new PDF files"
 
     cd /var/spool/cups-pdf/JOBBOX
