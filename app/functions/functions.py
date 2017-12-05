@@ -121,6 +121,7 @@ def write_conf (essid, password):
 	return True
 
 def connect ():
+	disconnect()
 	a = run(args=["sudo", "/sbin/wpa_supplicant", "-iwlan1", "-c/home/pi/wpa_supplicant.conf", "-B"], stdout=PIPE)
 
 	print(a)
