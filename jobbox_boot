@@ -15,7 +15,6 @@
 
 #   DO THESE COMMANDS OUTSIDE OF A VIRTUALENV
 # sudo cp jobbox_boot /etc/init.d/
-#	starts script at runlevels 3, 4, 5 at low priority and stops it at high priority in 1 and 6
 # sudo update-rc.d jobbox_boot defaults
 
 export AWS_ACCESS_KEY_ID=AKIAIBPZ7TTPXXJWSYNQ
