@@ -30,7 +30,7 @@ SCRIPTNAME=/etc/init.d/$NAME
 
 case "$1" in
 start)
-    sudo /sbin/wpa_supplicant -iwlan1 -c/home/pi/wipiServer/wpa_supplicant.conf -B
+    `sudo /sbin/wpa_supplicant -iwlan1 -c$DAEMON_PATH/wpa_supplicant.conf -B > /home/pi/wpas_log`
 	printf "%-50s" "Starting $NAME..."
 	cd $DAEMON_PATH
     source ./bin/activate
