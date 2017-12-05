@@ -34,7 +34,7 @@ start)
 	echo "Starting $NAME..."
     cd /var/spool/cups-pdf/ANONYMOUS
     # `$DAEMON $DAEMONOPTS > /dev/null 2>&1 echo $!`
-    `$DAEMON $DAEMONOPTS > /home/pi/watchman_log`
+    `$DAEMON $DAEMONOPTS > /home/pi/watchman_log 2>&1`
     echo "watchman watching /var/spool/cups-pdf/ANONYMOUS for new PDF files"
 
     cd /var/spool/cups-pdf/JOBBOX
