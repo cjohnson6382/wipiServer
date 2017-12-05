@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 import boto3
 import requests
@@ -15,8 +17,7 @@ s3 = boto3.resource('s3')
 source_dirs = [
         '/var/spool/cups-pdf/ANONYMOUS/',
         '/var/spool/cups-pdf/JOBBOX/',
-        '/home/PDF/',
-        '/var/spool/cups-pdf/ANONYMOUS/'
+        '/home/PDF/'
 ]
 
 
