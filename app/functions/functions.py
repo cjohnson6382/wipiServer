@@ -181,7 +181,8 @@ def clear_config ():
 	db.session.commit()
 
 	if c:
-		return { "status": "disconnected and deleted all stored wifi networks" }
+		should_be_none = WifiNetwork.query.all()
+		return { "status": "disconnected and deleted all stored wifi networks", "networks": should_be_none }
 	else: 
 		return { "status": "I do not even know; you suck at this" }
 
